@@ -1,5 +1,5 @@
 # Box Office Movies Analysis; EDA and Linear Regression Project
-![Guy watching several movies](images/bom-analysis.jpg)
+![Guy watching several movies](./bom-analysis.jpg "Guy watching several movies")
 
 ## Table of Contents
 - [Project Overview](#project-overview)
