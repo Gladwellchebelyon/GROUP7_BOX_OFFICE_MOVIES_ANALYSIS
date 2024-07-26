@@ -1,5 +1,5 @@
 # Box Office Movies Analysis; EDA and Linear Regression Project
-![Guy watching sereval movies](C:\Users\Monica\Documents\Moringa\Phase_2\Project\GROUP7_BOX_OFFICE_MOVIES_ANALYSIS\bom-analysis.jpg)
+![Guy watching several movies](images/bom-analysis.jpg)
 
 ## Table of Contents
 - [Project Overview](#project-overview)
@@ -74,8 +74,9 @@ To run this project, follow these steps:
 Open the Jupyter notebook and follow the instructions to reproduce the analysis and results:
 
 ```bash
+```
+## Results and Insights 
 
-## Results and Insights
 
 ## Contributors
 1. Gladwell 	Chepkorir
