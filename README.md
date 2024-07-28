@@ -81,8 +81,7 @@ Open the Jupyter notebook and follow the instructions to reproduce the analysis 
 ## Contributors
 1. Gladwell 	Chepkorir
 2. Isaac 	Ngugi
-3. Kezia	Neema
-4. Monica 	Anyango
-5. Kelvin	Letimalo
+3. Monica 	Anyango
+4. Kelvin	Letimalo
 
 ## License
