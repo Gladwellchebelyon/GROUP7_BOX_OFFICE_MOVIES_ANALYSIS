@@ -1,5 +1,5 @@
 # Box Office Movies Analysis; EDA and Linear Regression Project
-![Guy watching several movies](./bom-analysis.jpg "Guy watching several movies")
+![Guy watching several movies](./Images/bom-analysis.jpg "Guy watching several movies")
 
 ## Table of Contents
 - [Project Overview](#project-overview)
@@ -47,23 +47,36 @@ Ultimately, we want to translate these insights into actionable recommendations 
 ## Data Understanding
 This analysis, uses datasets from:
 
-    1. [IMD Data Base](https://www.imdb.com/)
-    2. [Box Office](https://www.boxofficemojo.com/)
-    3. [Rotten Tomatoes](https://www.rottentomatoes.com/)
-    4. [The Movie](https://www.themoviedb.org/)
-    5. [The Numbers](https://www.the-numbers.com/
+[IMD Data Base](https://www.imdb.com/)<br>
+[Box Office](https://www.boxofficemojo.com/)<br>
+[Rotten Tomatoes](https://www.rottentomatoes.com/)<br>
+[The Movie](https://www.themoviedb.org/)<br>
+[The Numbers](https://www.the-numbers.com/)<br>
 
 The data contains information about various films, including their genres, budgets, box office revenues, movie ratings, and release dates.<br>
 Understanding the structure and contents of our data will be the first step in uncovering the insights needed to guide our new movie studio's strategy.
 
 
 ## Exploratory Data Analysis (EDA)
+
 The EDA section involves data cleaning, exploration, and visualization to uncover patterns and trends in the dataset. Key steps include handling missing values, encoding categorical variables, and visualizing distributions and relationships.
 ### Univariate Analysis
 
+In the Univariate Analysis section, we focus on examining the statistical properties of individual
+variables in our dataset. By analyzing one variable at a time, we can identify patterns, detect
+outliers, and gain a clear understanding of each variable’s behavior, which is essential for accurate data interpretation and further analysis.
 ### Bivariate Analysis
 
+The Bivariate Analysis section investigates the relationships between pairs of variables exploring
+how the two variables interact with each other. This analysis helps us uncover associations, trends,
+and dependencies that might exist between variables.
+
 ### Multivariate Analysis
+
+In the Multivariate Analysis section, we extend our examination to more than two variables simultaneously.
+This comprehensive approach provides deeper insights into the complex structure of our
+data, helping us identify patterns, correlations, and underlying factors that are crucial for building
+robust and accurate predictive models.
 
 ## Statistical Data Analysis
 
@@ -75,12 +88,12 @@ our sample. This analysis will help validate our findings, identify significant 
 data-driven decision-making.
 ### Hypothesis Testing
 #### Test of Movies Released in Summer and Non-Summer
-** Two Sample T-test
-Null Hypothesis (H￿): There is no significant difference in movie profits between movies
+**Two Sample T-test**
+Null Hypothesis (H0): There is no significant difference in movie profits between movies
 released Summer and Non-Summer.
-Alternative Hypothesis (H￿): There is a significant difference in movie profits between
+Alternative Hypothesis (H1): There is a significant difference in movie profits between
 summer and non-summer months.
-![Summer months box plots](Images/summer_box_plots.PNG "Summer months box plots")
+![Summer months box plots](./Images/summer_box_plots.PNG "Summer months box plots")
 
 Based on the analysis the difference in movie profits between summer and non-summer months is statistically significant.
 From the box plot, we can see that the box for summer movies (True) is slightly higher than for non-summer movies (False).
