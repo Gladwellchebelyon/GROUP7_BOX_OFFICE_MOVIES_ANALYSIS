@@ -1,5 +1,5 @@
 # Box Office Movies Analysis; EDA and Linear Regression Project
-![Guy watching several movies](./Images/bom-analysis.PNG "Guy watching several movies")
+![Guy watching several movies](./Images/bom-analysis.png "Guy watching several movies")
 
 ## Table of Contents
 - [Project Overview](#project-overview)
@@ -90,7 +90,7 @@ outliers, and gain a clear understanding of each variable’s behavior, which is
     plt.tight_layout()
     plt.show();
     ```
-![Top_ten_writers](./Images/Top_ten_writers.jpg "Top ten writers")
+![Top_ten_writers](./Images/Top_ten_writers.PNG "Top ten writers")
 
 ### Bivariate Analysis
 
