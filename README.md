@@ -77,7 +77,8 @@ In the Multivariate Analysis section, we extend our examination to more than two
 This comprehensive approach provides deeper insights into the complex structure of our
 data, helping us identify patterns, correlations, and underlying factors that are crucial for building
 robust and accurate predictive models.
-```bash
+
+    ```bash
     #Correlation analysis
     corr = bomdf[['domestic_gross', 'foreign_gross', 'year']].corr()
     sns.heatmap(corr, annot=True, cmap='coolwarm')
@@ -99,7 +100,8 @@ Null Hypothesis (H0): There is no significant difference in movie profits betwee
 released Summer and Non-Summer.
 Alternative Hypothesis (H1): There is a significant difference in movie profits between
 summer and non-summer months.
- ```bash
+
+     ```bash
     # Splitting the dataframe into a subset for summer months 
 TN_df['is_summer'] = TN_df['release_month'].isin([5, 6, 7])
 
@@ -121,6 +123,7 @@ if p_value < a:
 else:
     print("Accept Null Hypothesis: There is no significant difference in movie profits between summer and non-summer months.")
     ```
+
 ![Summer months box plots](./Images/summer_box_plots.PNG "Summer months box plots")
 
 Based on the analysis the difference in movie profits between summer and non-summer months is statistically significant.
