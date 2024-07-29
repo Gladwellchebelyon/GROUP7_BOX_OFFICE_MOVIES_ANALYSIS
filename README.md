@@ -100,28 +100,27 @@ Null Hypothesis (H0): There is no significant difference in movie profits betwee
 released Summer and Non-Summer.
 Alternative Hypothesis (H1): There is a significant difference in movie profits between
 summer and non-summer months.
-
      ```bash
     # Splitting the dataframe into a subset for summer months 
-TN_df['is_summer'] = TN_df['release_month'].isin([5, 6, 7])
+    TN_df['is_summer'] = TN_df['release_month'].isin([5, 6, 7])
 
-# Creating a subset of non summer months from the remaing months and extracting profit values for both subsets.
+    # Creating a subset of non summer months from the remaing months and extracting profit values for both subsets.
 
-summer_profits = TN_df[TN_df['is_summer']]['profit']
-non_summer_profits = TN_df[~TN_df['is_summer']]['profit']
+    summer_profits = TN_df[TN_df['is_summer']]['profit']
+    non_summer_profits = TN_df[~TN_df['is_summer']]['profit']
 
-# Performing a t-test to compare the mean profits between summer and non-summer movies.
-t_stat, p_value = stats.ttest_ind(summer_profits, non_summer_profits)
+    # Performing a t-test to compare the mean profits between summer and non-summer movies.
+    t_stat, p_value = stats.ttest_ind(summer_profits, non_summer_profits)
 
-print(f"T-statistic: {t_stat}")
-print(f"P-value: {p_value}")
+    print(f"T-statistic: {t_stat}")
+    print(f"P-value: {p_value}")
 
-# Significance Level
-a = 0.05
-if p_value < a:
-    print("Reject Null Hypothesis: There is no significant difference in movie profits between summer months (May, June, July) and other months.")
-else:
-    print("Accept Null Hypothesis: There is no significant difference in movie profits between summer and non-summer months.")
+    # Significance Level
+    a = 0.05
+    if p_value < a:
+        print("Reject Null Hypothesis: There is no significant difference in movie profits between summer months (May, June, July) and other months.")
+    else:
+        print("Accept Null Hypothesis: There is no significant difference in movie profits between summer and non-summer months.")
     ```
 
 ![Summer months box plots](./Images/summer_box_plots.PNG "Summer months box plots")
