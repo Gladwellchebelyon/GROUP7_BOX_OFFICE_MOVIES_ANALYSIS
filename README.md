@@ -77,7 +77,13 @@ In the Multivariate Analysis section, we extend our examination to more than two
 This comprehensive approach provides deeper insights into the complex structure of our
 data, helping us identify patterns, correlations, and underlying factors that are crucial for building
 robust and accurate predictive models.
-
+```bash
+    #Correlation analysis
+    corr = bomdf[['domestic_gross', 'foreign_gross', 'year']].corr()
+    sns.heatmap(corr, annot=True, cmap='coolwarm')
+    plt.title('Correlation Matrix')
+    plt.show()
+    ```
 ## Statistical Data Analysis
 
 In this section, we apply statistical techniques to derive insights from our dataset. We use descriptive
@@ -93,6 +99,28 @@ Null Hypothesis (H0): There is no significant difference in movie profits betwee
 released Summer and Non-Summer.
 Alternative Hypothesis (H1): There is a significant difference in movie profits between
 summer and non-summer months.
+ ```bash
+    # Splitting the dataframe into a subset for summer months 
+TN_df['is_summer'] = TN_df['release_month'].isin([5, 6, 7])
+
+# Creating a subset of non summer months from the remaing months and extracting profit values for both subsets.
+
+summer_profits = TN_df[TN_df['is_summer']]['profit']
+non_summer_profits = TN_df[~TN_df['is_summer']]['profit']
+
+# Performing a t-test to compare the mean profits between summer and non-summer movies.
+t_stat, p_value = stats.ttest_ind(summer_profits, non_summer_profits)
+
+print(f"T-statistic: {t_stat}")
+print(f"P-value: {p_value}")
+
+# Significance Level
+a = 0.05
+if p_value < a:
+    print("Reject Null Hypothesis: There is no significant difference in movie profits between summer months (May, June, July) and other months.")
+else:
+    print("Accept Null Hypothesis: There is no significant difference in movie profits between summer and non-summer months.")
+    ```
 ![Summer months box plots](./Images/summer_box_plots.PNG "Summer months box plots")
 
 Based on the analysis the difference in movie profits between summer and non-summer months is statistically significant.
@@ -107,11 +135,11 @@ To run this project, follow these steps:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/moviestudio-eda.git
+    git clone https://github.com/Gladwellchebelyon/GROUP7_BOX_OFFICE_MOVIES_ANALYSIS.git
     ```
 2. Navigate to the project directory:
     ```bash
-    cd moviestudio-eda
+    cd GROUP7_BOX_OFFICE_MOVIES_ANALYSIS
     ```
 3. Install the required dependencies:
     ```bash
@@ -121,8 +149,6 @@ To run this project, follow these steps:
 ## Usage
 Open the Jupyter notebook and follow the instructions to reproduce the analysis and results:
 
-```bash
-```
 ## Results and Insights 
 
 ### Findings
@@ -214,3 +240,4 @@ Find the links to our [Non Technical Presentation](https://www.canva.com/design/
 5. Kezia Neema
 
 ## License
+All source code that is specific to this project is available under [GNU General Public License v2.0](https://github.com/Gladwellchebelyon/GROUP7_BOX_OFFICE_MOVIES_ANALYSIS/blob/main/LICENSE)
