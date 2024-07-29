@@ -1,5 +1,5 @@
 # Box Office Movies Analysis; EDA and Linear Regression Project
-![Guy watching several movies](./Images/bom-analysis.jpg "Guy watching several movies")
+![Guy watching several movies](./Images/bom-analysis.PNG "Guy watching several movies")
 
 ## Table of Contents
 - [Project Overview](#project-overview)
@@ -65,11 +65,69 @@ The EDA section involves data cleaning, exploration, and visualization to uncove
 In the Univariate Analysis section, we focus on examining the statistical properties of individual
 variables in our dataset. By analyzing one variable at a time, we can identify patterns, detect
 outliers, and gain a clear understanding of each variable’s behavior, which is essential for accurate data interpretation and further analysis.
+
+### **Histogram of Top 10 Writers by Frequency of Movies Written**
+
+- The x-axis lists the writers, and the y-axis represents the frequency of movies, ranging from 0 to 10.
+- **Woody Allen** has writen the most movies, with a frequency close to 8.
+- Most other wrs, writers as **Don Mancin**, **Craig Bolotin**, and **Alfred Hitchcock**, have directed between 4 and 6 movies.
+- The chart highlights the prominence of writers  in terms of the number of movies they have directed. 
+    ```bash
+    # Get the top 10 directors, excluding 'Other'
+    top_10_writers = rtmdf['writer'].value_counts().head(11).index
+    top_10_writers = top_10_writers[top_10_writers != 'Other']
+
+    # Filter the DataFrame to include only the top 10 directors
+    top_10_df = rtmdf[rtmdf['writer'].isin(top_10_writers)]
+    
+    # Plot the histogram
+    plt.figure(figsize=(10, 6))
+    sns.histplot(data=top_10_df, x='writer', shrink=.8)
+    plt.xticks(rotation=45)
+    plt.xlabel('Writer')
+    plt.ylabel('Frequency')
+    plt.title('Histogram of Top 10 Writer by Frequency')
+    plt.tight_layout()
+    plt.show();
+    ```
+![Top_ten_writers](./Images/Top_ten_writers.jpg "Top ten writers")
+
 ### Bivariate Analysis
 
 The Bivariate Analysis section investigates the relationships between pairs of variables exploring
 how the two variables interact with each other. This analysis helps us uncover associations, trends,
 and dependencies that might exist between variables.
+
+### **Top 10 Studios by Domestic and Foreign Gross** 
+
+- Comparing the gross earnings of the top 10 film studios in both domestic (blue bars) and foreign (orange bars) markets. 
+- The vertical axis represents the gross earnings in billions, ranging from 0 to 10.
+- **Buena Vista (Disney)** has the highest combined gross, with significant earnings in both domestic and foreign markets.
+- **Universal Pictures** and **Warner Bros** also show substantial earnings, with a notable portion coming from foreign markets.
+- The chart highlights the global reach and financial performance of these major studios, indicating their success in both domestic and international markets.
+    ```bash
+    # Filter out zeros in domestic and foreign gross
+    filtered_data = bomdf[(bomdf['domestic_gross'] != 0) & (bomdf['foreign_gross'] != 0)]
+    
+    # Group by studio and calculate the sum of domestic and foreign gross
+    studio_gross = filtered_data.groupby('studio')[['domestic_gross', 'foreign_gross']].sum()
+    
+    # Sort by domestic and foreign gross and select the top 10 studios
+    top_studios = studio_gross.sort_values(by=['domestic_gross', 'foreign_gross'], ascending=False).head(10)
+    
+    # Plotting
+    fig, ax = plt.subplots(figsize=(18, 8))
+    top_studios.plot(kind='bar', stacked=True, ax=ax)
+    
+    # Labeling
+    plt.title('Top 10 Studios by Domestic and Foreign Gross')
+    plt.xlabel('Studio')
+    plt.ylabel('Gross (in billions)')
+    plt.xticks(rotation=45)
+    plt.legend(title='Gross Type')
+    plt.show();    
+    ```
+![top ten studios](./Images/top_ten_studios.jpg "top ten studios")
 
 ### Multivariate Analysis
 
@@ -77,7 +135,11 @@ In the Multivariate Analysis section, we extend our examination to more than two
 This comprehensive approach provides deeper insights into the complex structure of our
 data, helping us identify patterns, correlations, and underlying factors that are crucial for building
 robust and accurate predictive models.
+### **Correlation matrix of relationships between `domestic_gross`, `foreign_gross`, and `year`**
 
+- **Domestic Gross vs. Foreign Gross**: There is a strong positive correlation (0.82), indicating that movies with higher domestic earnings tend to also have higher foreign earnings.
+- **Year vs. Domestic Gross**: There is a very weak positive correlation (0.019), suggesting almost no linear relationship between the year and domestic earnings.
+- **Year vs. Foreign Gross**: The correlation is not explicitly shown, but it appears to be similarly weak.
     ```bash
     #Correlation analysis
     corr = bomdf[['domestic_gross', 'foreign_gross', 'year']].corr()
@@ -85,6 +147,8 @@ robust and accurate predictive models.
     plt.title('Correlation Matrix')
     plt.show()
     ```
+![Correlation Matrix](./Images/Correlation_Matrix.PNG "Correlation Matrix")
+
 ## Statistical Data Analysis
 
 In this section, we apply statistical techniques to derive insights from our dataset. We use descriptive
@@ -94,10 +158,11 @@ and regression analysis, help us make predictions or generalizations about a pop
 our sample. This analysis will help validate our findings, identify significant patterns, and supports
 data-driven decision-making.
 ### Hypothesis Testing
-#### Test of Movies Released in Summer and Non-Summer
-**Two Sample T-test**
+
+### Test of Movies Released in Summer and Non-Summer
+**Two Sample T-test**<br>
 Null Hypothesis (H0): There is no significant difference in movie profits between movies
-released Summer and Non-Summer.
+released Summer and Non-Summer.<br>
 Alternative Hypothesis (H1): There is a significant difference in movie profits between
 summer and non-summer months.
      ```bash
@@ -131,6 +196,53 @@ From both the t-test and the box plot visualisation we can infer that Movie prof
 
 ## Linear Regression Model
 A linear regression model is created to predict box office revenue based on factors such as budget, genre, and release timing. The model is evaluated using metrics such as mean squared error and R-squared.
+
+### Predict the worldwide gross revenue of movies based on their production budget using a linear regression model
+
+- The scatter plot compares actual and predicted worldwide gross revenues.
+- The red regression line indicates the model's predictions.
+- The model has a **Mean Squared Error (MSE)** of approximately \(1.6 \times 10^{16}\) and an **R-squared score** of about 0.50.
+- An R-squared score of 0.50 suggests that the model explains about 50% of the variability in worldwide gross revenue based on production budget.
+- The visualization helps assess how well the model predicts worldwide gross revenue from production budgets. 
+     ```bash
+    # Select the feature and target variable
+    X = TN_df[['production_budget']]
+    y = TN_df['worldwide_gross']
+    
+    # Split the data into training and testing sets
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    
+    # Scale the features
+    scaler = StandardScaler()
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_test_scaled = scaler.transform(X_test)
+    
+    # Train the model
+    model1 = LinearRegression()
+    model1.fit(X_train_scaled, y_train)
+    
+    # Make predictions
+    y_pred = model1.predict(X_test_scaled)
+    
+    # Evaluate the model
+    mse = mean_squared_error(y_test, y_pred)
+    r2 = r2_score(y_test, y_pred)
+    
+    print("Model 1: Predicting worldwide gross based on production budget")
+    print(f"Mean squared error: {mse}")
+    print(f"R-squared score: {r2}")
+    
+    # Visualize
+    plt.figure(figsize=(10, 6))
+    plt.scatter(X_test, y_test, color='blue', label='Actual')
+    plt.scatter(X_test, y_pred, color='red', label='Predicted')
+    plt.xlabel('Production Budget')
+    plt.ylabel('Worldwide Gross')
+    plt.title('Actual vs Predicted Worldwide Gross')
+    plt.legend()
+    plt.show()
+    ```
+![Linear Regression Model](./Images/Linear_Regression_Model.PNG "Linear Regression Model")
 
 ## Installation
 To run this project, follow these steps:
